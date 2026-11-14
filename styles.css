@@ -34,55 +34,15 @@ h1 {
   color: #777;
   font-size: 13px;
 }
-.segment-bar {
-  align-self: center;
-  display: flex;
-  padding: 2px;
-  border: 1px solid #858585;
-  border-radius: 5px;
-  background: #b1b1b1;
-}
-.segment-option {
-  position: relative;
-  cursor: pointer;
-}
-.segment-option input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-.segment-option span {
-  display: block;
-  min-width: 84px;
-  padding: 7px 14px;
-  border: 1px solid #a5a5a5;
-  background: linear-gradient(#f8f8f8, #d8d8d8);
-  color: #333;
-  text-align: center;
-  font-size: 13px;
-}
-.segment-option:first-child span {
-  border-radius: 3px 0 0 3px;
-}
-.segment-option:last-child span {
-  border-radius: 0 3px 3px 0;
-}
-.segment-option input:checked + span {
-  background: linear-gradient(#7a7a7a, #5e5e5e);
-  color: #fff;
-  font-weight: 600;
-}
-.segment-option input:focus-visible + span {
-  outline: 2px solid #0000fe;
-  outline-offset: 2px;
-}
 .workspace {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 16px;
   align-items: center;
   padding-top: 18px;
+}
+.side-selector {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
 }
 .editor-column {
   min-width: 0;
@@ -152,23 +112,6 @@ select:focus-visible,
   background: #d2d2d2;
   cursor: not-allowed;
 }
-.accent {
-  min-width: 170px;
-  min-height: 44px;
-  border-color: #0000b5;
-  border-radius: 7px;
-  color: #fff;
-  background: linear-gradient(#4b65ff, #142bda 45%, #0000a8);
-  font-weight: 700;
-}
-.accent:hover:not(:disabled) {
-  background: #3049ed;
-}
-.action-column {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .download-row {
   display: flex;
   gap: 6px;
@@ -183,14 +126,12 @@ select {
   color: #333;
   font: inherit;
 }
-.status {
+.error-message {
   min-height: 20px;
   margin: 10px 0 0;
   color: #555;
   font-size: 12px;
   text-align: center;
-}
-.status.error {
   color: #9b2020;
 }
 .author-callout {
@@ -232,15 +173,8 @@ footer a:hover {
     gap: 20px;
     padding-top: 16px;
   }
-  .action-column {
-    order: 2;
-  }
   .editor-column:last-child {
     order: 3;
-  }
-  .segment-option span {
-    min-width: 0;
-    padding-inline: 10px;
   }
   .preview-card {
     width: min(260px, 82vw);
@@ -258,11 +192,5 @@ footer a:hover {
   }
   .author-arrow path {
     stroke-width: 18;
-  }
-}
-@media (max-width: 390px) {
-  .segment-option span {
-    padding-inline: 7px;
-    font-size: 12px;
   }
 }

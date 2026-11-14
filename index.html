@@ -14,59 +14,36 @@
         <p>Добавьте синюю полосу к изображению</p>
       </header>
 
-      <section class="segment-bar" aria-label="Сторона полосы">
-        <label class="segment-option">
-          <input type="radio" name="side" value="bottom" checked />
-          <span>Снизу</span>
-        </label>
-        <label class="segment-option">
-          <input type="radio" name="side" value="right" />
-          <span>Справа</span>
-        </label>
-        <label class="segment-option">
-          <input type="radio" name="side" value="left" />
-          <span>Слева</span>
-        </label>
-        <label class="segment-option">
-          <input type="radio" name="side" value="top" />
-          <span>Сверху</span>
-        </label>
-      </section>
-
       <section class="workspace" aria-label="Редактор изображения">
         <div class="editor-column">
-          <div
-            id="dropzone"
-            class="preview-card dropzone"
-            tabindex="0"
-            role="button"
-            aria-label="Загрузить изображение"
-          >
-            <div id="input-placeholder" class="placeholder">
-              Перетащите файл сюда<br />или выберите его кнопкой ниже
+          <div id="side-selector" class="side-selector">
+            <div></div>
+            <button class="button" id="side-top">+</button>
+            <div></div>
+            <button class="button" id="side-left">+</button>
+            <div
+              id="dropzone"
+              class="preview-card dropzone result-card"
+              tabindex="0"
+              aria-label="Загрузить изображение"
+            >
+              <div id="result-placeholder" class="placeholder">
+                Нажмите, чтобы выбрать файл,<br />или перетащите файл сюда
+              </div>
+              <img id="result-preview" alt="Обработанное изображение" hidden />
+              <canvas id="result-canvas" hidden></canvas>
             </div>
-            <img id="source-preview" alt="Исходное изображение" hidden />
-            <canvas id="source-canvas" hidden></canvas>
+            <button class="button" id="side-right">+</button>
+            <div></div>
+            <button class="button" id="side-bottom">+</button>
+            <div></div>
           </div>
-          <button id="choose-button" class="button" type="button">Загрузить фото...</button>
           <input
             id="file-input"
             type="file"
             accept=".jpg,.jpeg,.png,.webp,.bmp,image/jpeg,image/png,image/webp,image/bmp"
             hidden
           />
-        </div>
-
-        <div class="action-column">
-          <button id="process-button" class="button accent" type="button" disabled>ЭКСАУТИЗИРОВАТЬ</button>
-        </div>
-
-        <div class="editor-column">
-          <div class="preview-card result-card">
-            <div id="result-placeholder" class="placeholder">Результат</div>
-            <img id="result-preview" alt="Обработанное изображение" hidden />
-            <canvas id="result-canvas" hidden></canvas>
-          </div>
           <div class="download-row">
             <select id="format-select" aria-label="Формат результата">
               <option value="png">PNG</option>
@@ -79,12 +56,12 @@
         </div>
       </section>
 
-      <p id="status" class="status" role="status" aria-live="polite"></p>
-      <div class="author-callout" aria-hidden="true">
+      <p id="error-message" class="error-message" aria-live="polite"></p>
+      <!--<div class="author-callout" aria-hidden="true">
         <svg class="author-arrow" viewBox="0 0 760 180" preserveAspectRatio="none">
           <path d="M 30 90 H 660 M 660 90 L 570 25 M 660 90 L 570 155" />
         </svg>
-      </div>
+      </div>-->
       <footer><a href="https://t.me/mej1ch">by mej1ch</a></footer>
     </main>
     <script src="app.js"></script>
