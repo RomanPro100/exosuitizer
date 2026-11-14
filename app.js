@@ -45,7 +45,10 @@ function readImage(file) {
     const url = URL.createObjectURL(file);
     const image = new Image();
     image.onload = () => resolve({ image, url });
-    image.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Не удалось открыть изображение.")); };
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Не удалось открыть изображение."));
+    };
     image.src = url;
   });
 }
@@ -128,10 +131,15 @@ function encodeBmp(canvas) {
   const pixelOffset = 54;
   const buffer = new ArrayBuffer(pixelOffset + rowSize * height);
   const view = new DataView(buffer);
-  view.setUint8(0, 0x42); view.setUint8(1, 0x4d);
-  view.setUint32(2, buffer.byteLength, true); view.setUint32(10, pixelOffset, true);
-  view.setUint32(14, 40, true); view.setInt32(18, width, true); view.setInt32(22, height, true);
-  view.setUint16(26, 1, true); view.setUint16(28, 24, true);
+  view.setUint8(0, 0x42);
+  view.setUint8(1, 0x4d);
+  view.setUint32(2, buffer.byteLength, true);
+  view.setUint32(10, pixelOffset, true);
+  view.setUint32(14, 40, true);
+  view.setInt32(18, width, true);
+  view.setInt32(22, height, true);
+  view.setUint16(26, 1, true);
+  view.setUint16(28, 24, true);
   view.setUint32(34, rowSize * height, true);
   for (let y = 0; y < height; y += 1) {
     const row = pixelOffset + (height - y - 1) * rowSize;
@@ -155,10 +163,17 @@ function downloadResult() {
     return;
   }
   const mime = `image/${format}`;
-  exportCanvas.toBlob((blob) => {
-    if (!blob) { setStatus("Браузер не поддерживает этот формат.", true); return; }
-    triggerDownload(blob, format === "jpeg" ? "jpg" : format);
-  }, mime, 1);
+  exportCanvas.toBlob(
+    (blob) => {
+      if (!blob) {
+        setStatus("Браузер не поддерживает этот формат.", true);
+        return;
+      }
+      triggerDownload(blob, format === "jpeg" ? "jpg" : format);
+    },
+    mime,
+    1,
+  );
 }
 
 function triggerDownload(blob, extensionName) {
@@ -173,15 +188,24 @@ function triggerDownload(blob, extensionName) {
 $("choose-button").addEventListener("click", () => fileInput.click());
 dropzone.addEventListener("click", () => fileInput.click());
 dropzone.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" || event.key === " ") { event.preventDefault(); fileInput.click(); }
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    fileInput.click();
+  }
 });
 fileInput.addEventListener("change", () => loadFile(fileInput.files[0]));
-["dragenter", "dragover"].forEach((eventName) => dropzone.addEventListener(eventName, (event) => {
-  event.preventDefault(); dropzone.classList.add("drag-active");
-}));
-["dragleave", "drop"].forEach((eventName) => dropzone.addEventListener(eventName, (event) => {
-  event.preventDefault(); dropzone.classList.remove("drag-active");
-}));
+["dragenter", "dragover"].forEach((eventName) =>
+  dropzone.addEventListener(eventName, (event) => {
+    event.preventDefault();
+    dropzone.classList.add("drag-active");
+  }),
+);
+["dragleave", "drop"].forEach((eventName) =>
+  dropzone.addEventListener(eventName, (event) => {
+    event.preventDefault();
+    dropzone.classList.remove("drag-active");
+  }),
+);
 dropzone.addEventListener("drop", (event) => loadFile([...event.dataTransfer.files][0]));
 processButton.addEventListener("click", processImage);
 downloadButton.addEventListener("click", downloadResult);
