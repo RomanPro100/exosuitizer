@@ -52,8 +52,8 @@ h1 {
   gap: 8px;
 }
 .preview-card {
-  width: 260px;
-  height: 260px;
+  width: 480px;
+  height: 480px;
   padding: 8px;
   display: grid;
   place-items: center;
@@ -151,20 +151,19 @@ select {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-footer {
-  margin-top: auto;
-  padding-top: 4px;
-  text-align: right;
-  font-size: 12px;
+.credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-footer a {
+.credits a {
   color: #555;
   text-decoration: none;
 }
-footer a:hover {
+.credits a:hover {
   color: #0000fe;
 }
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .app-shell {
     padding: 14px 12px 12px;
   }
@@ -177,8 +176,8 @@ footer a:hover {
     order: 3;
   }
   .preview-card {
-    width: min(260px, 82vw);
-    height: min(260px, 82vw);
+    width: min(320px, 82vw);
+    height: min(320px, 82vw);
   }
   .download-row {
     width: min(260px, 82vw);
