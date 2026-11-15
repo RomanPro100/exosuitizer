@@ -47,6 +47,7 @@ function resetResult() {
   state.resultCanvas = null;
   resultPreview.removeAttribute("src");
   resultPreview.hidden = true;
+  resultPreview.classList.add("hidden");
   resultPlaceholder.hidden = false;
   downloadButton.disabled = true;
   setSideButtonsDisabled(true);
@@ -80,6 +81,7 @@ async function loadFile(file) {
     state.sourceName = file.name.replace(/\.[^.]+$/, "") || "exosuit_result";
     resultPreview.src = state.sourceUrl;
     resultPreview.hidden = false;
+    resultPreview.classList.remove("hidden");
     resultPlaceholder.hidden = true;
     setSideButtonsDisabled(false);
   } catch (error) {
@@ -108,6 +110,7 @@ function processImage() {
   state.resultCanvas = resultCanvas;
   resultPreview.src = resultCanvas.toDataURL("image/png");
   resultPreview.hidden = false;
+  resultPreview.classList.remove("hidden");
   resultPlaceholder.hidden = true;
   downloadButton.disabled = false;
   setSideButtonsDisabled(false);
